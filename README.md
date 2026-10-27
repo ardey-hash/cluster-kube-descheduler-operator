@@ -25,13 +25,13 @@ releases:
 
 ```
 Steps:
-- [ ] bump .ci-operator.yaml if needed (as a separate PR and wait until the changes gets propagated to https://github.com/openshift/release/tree/master/ci-operator/config/openshift/ of the corresponding CI definition)
+- [ ] bump .ci-operator.yaml if needed (as a separate PR and wait until the changes get propagated to https://github.com/openshift/release/tree/master/ci-operator/config/openshift/ of the corresponding CI definition)
 - [ ] bump go version in a go.mod file if needed (check go.mod of the corresponding kubernetes release under https://github.com/kubernetes/kubernetes/branches)
-- [ ] bump all k8s.io/*, github.com/openshift/* and other relevant dependencies (you can consults the corresponding go.mod file as mentioned previously)
-- [ ] (recommended) commit all the go.mod and go.sum changes separatelly from `go mod vendor` changes
+- [ ] bump all k8s.io/*, github.com/openshift/* and other relevant dependencies (you can consult the corresponding go.mod file as mentioned previously)
+- [ ] (recommended) commit all the go.mod and go.sum changes separately from `go mod vendor` changes
 - [ ] run "go mod vendor" and commit the changes
 - [ ] build the code (e.g. by running make) and adjust the code if needed to make the building step compile successfully
-- [ ] run unit tests (e.g. by running make unit-tests) successfully
+- [ ] run unit tests (e.g. by running make test-unit) successfully
 - [ ] commit the code adjustments if there are any
 ```
 
@@ -133,7 +133,7 @@ and attempts to evict pods from "high utilization" nodes that can fit onto "low 
 node is any node consuming more than 50% its available cpu, memory, *or* pod capacity. A low utilization node is any node
 with less than 20% of its available cpu, memory, *and* pod capacity.
 
-This profile enables the [`LowNodeUtilizaition`](https://github.com/kubernetes-sigs/descheduler/#lownodeutilization),
+This profile enables the [`LowNodeUtilization`](https://github.com/kubernetes-sigs/descheduler/#lownodeutilization),
 [`RemovePodsHavingTooManyRestarts`](https://github.com/kubernetes-sigs/descheduler/#removepodshavingtoomanyrestarts) and
 [`PodLifeTime`](https://github.com/kubernetes-sigs/descheduler/#podlifetime) strategies. In the future, more configuration
 may be made available through the operator for these strategies based on user feedback.
@@ -144,7 +144,7 @@ clusters. It does not evict pods based on the 24 hour lifetime used by Lifecycle
 
 ### CompactAndScale
 This profile seeks to evict pods to enable the same workload to run on a smaller set of nodes.
-It will attempts to evict pods from "under utilized" nodes that can fit into fewer nodes.
+It will attempt to evict pods from "under utilized" nodes that can fit into fewer nodes.
 An under utilized node is any node consuming less than 20% of its available cpu, memory, *and* pod capacity.
 
 This profile enables the [`HighNodeUtilization`](https://github.com/kubernetes-sigs/descheduler/#highnodeutilization) strategy.
@@ -152,7 +152,7 @@ In the future, more configuration may be made available through the operator bas
 
 ### KubeVirtRelieveAndMigrate
 
-This profiles seeks to evict pods from high-cost nodes to relieve overall expenses while considering workload migration.
+This profile seeks to evict pods from high-cost nodes to relieve overall expenses while considering workload migration.
 Node cost can include:
 - Actual resource utilization: Increased resource pressure leads to higher overhead for running applications.
 - Node maintenance costs: A higher number of containers on a node results in greater resource counting.
